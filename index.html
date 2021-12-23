@@ -23,7 +23,7 @@
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <input id="searchTxt" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
         </div>
@@ -38,21 +38,22 @@
                 <div class="form-group">
                     <textarea class="form-control" id="addTxt" rows="3"></textarea>
                 </div>
-                <button class="btn btn-primary" id="addBtn">Add Notes</button>
+                <button class="btn btn-primary" id="addBtn">Add Note</button>
             </div>
         </div>
         <h1>Your Notes</h1>
         <hr>
         <!--using hr tag for line under the text-->
         <div id="notes" class="row container-fluid">
-
-            <div class="noteCard my-2 mx-2 card" style="width: 18rem;">
+            <!--using anothe card to keep visible our existed notes -->
+            <!-- we are menipulating this card through our js file in (html) variable that'why we dont need it more.But we need only div with id="notes"-->
+            <!-- <div class="noteCard my-2 mx-2 card" style="width: 18rem;">
                 <div class="card-body">
                     <h5 class="card-title">Note</h5>
                     <p class="card-text"></p>
                     <button href="#" class="btn btn-primary">Delete Note</button>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 
