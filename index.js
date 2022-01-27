@@ -1,4 +1,4 @@
-console.log("this is project1 with harry");
+console.log("This is 1st Project with harry about Add Notes and save them into local Storage");
 showNotes(); //calling this func to keep all notes viiblem on web page every when page reloads
 
 //if user adds a note, add it to local storage
@@ -6,16 +6,22 @@ let addBtn = document.getElementById("addBtn");
 addBtn.addEventListener("click", (e) => {
 
     let addTxt = document.getElementById("addTxt");
+    let addTitle = document.getElementById("addTitle");
     let notes = localStorage.getItem("notes"); //key in localStorage
 
     if (notes == null) {
-        notesObj = []; //blank array
+        let notesObj = []; //blank array
     } else {
-        notesObj = JSON.parse(notes); //getting data in the form of array
+        notesObj = JSON.parse(notes); //getting data in the form of array (NOTE notesObj is Array of Objects)
     }
-    notesObj.push(addTxt.value); //if someone writing a note in text-area and click on addNote button, the value of notes will be updated
+    let myObj = { //getting values of title and text in a object
+        title: addTitle.value,
+        text: addTxt.value
+    }
+    notesObj.push(myObj); //if someone writing a note in text-area and title and click on addNote button, the value of notes will be updated
     localStorage.setItem("notes", JSON.stringify(notesObj)); //value(String) to store in localstorage we need to use JSON method
-    addTxt.value = ""; //after updating notes text-area will be blank
+    addTxt.value = "";
+    addTitle.value = ""; //after updating notes text-area will be blank
     //console.log(notesObj);
     showNotes(); //to display our notes in the browser
 
@@ -31,13 +37,13 @@ function showNotes() {
     }
     let html = "";
     notesObj.forEach(function(element, index) {
-        // appending all notes-card under the text area
+        //((taking card from bs) appending all notes-card under the text area
         html += ` 
             
         <div class="noteCard my-2 mx-2 card" style="width: 18rem;">
             <div class="card-body">
-                <h5 class="card-title">Note ${index + 1}</h5>
-                <p class="card-text">${element}</p>
+                <h5 class="card-title">${index+1}-${element.title}:</h5>
+                <p class="card-text">${element.text}</p>
                 <button id="${index}" onclick="deleteNote(this.id)" class="btn btn-primary">Delete Note</button>
             </div>
         </div>
@@ -75,7 +81,7 @@ let searchTxt = document.getElementById("searchTxt");
 searchTxt.addEventListener("input", () => { //this means every time in search input value changes this event will fires
     let inputValue = searchTxt.value.toLowerCase(); //if uuser put value in capitalcase the value will convert into lower case and will match
     //console.log("Input Event is fired:", inputValue);
-    let noteCards = document.getElementsByClassName("noteCard"); //all stored notes in localstorage
+    let noteCards = document.getElementsByClassName("noteCard"); //(id=noteCard, id of card used for variable (html) see above) all stored notes in localstorage
     Array.from(noteCards).forEach(function(element) {
         //to get text(content) of Search-bar 
         let cardTxt = element.getElementsByTagName("p")[0].innerText; //p tag from div-class=noteCard
